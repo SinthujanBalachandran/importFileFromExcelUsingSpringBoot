@@ -1,0 +1,41 @@
+package com.example.demo.services;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.entities.User;
+import com.example.demo.repos.UserRepo;
+
+@Service
+@Transactional
+public class UserServiceImpl implements UserService {
+@Autowired
+private UserRepo userRepo;
+
+@Override
+public List<User> findAll() {
+	// TODO Auto-generated method stub
+	return (List<User>) userRepo.findAll();
+}
+
+@Override
+public boolean saveDataFromUploadFile(MultipartFile file) {
+boolean isFlag = false;
+String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+if(extension.equalsIgnoreCase("json")) {
+	isFlag= readDataFromJson(file);
+}
+	return false;
+}
+
+private boolean readDataFromJson(MultipartFile file) {
+	// TODO Auto-generated method stub
+	return false;
+}
+}
